@@ -1,0 +1,91 @@
+package edu.csc150;
+import greenfoot.World;
+
+import java.awt.Color;
+import java.util.Random;
+
+import Enums.Direction.Direction;
+
+public class TrafficWorld extends World  {
+	
+	
+	public static final int MAPLONG =1000;
+	public static final int MAPHIEGHT =750;
+	private static final int ROADWIDTH=50;
+	 int ROADS_X=5;
+	 int ROADS_Y=7;
+	
+	Road [] roadsEW =  new Road[ROADS_X];
+	Road [] roadsNS = new Road[ROADS_Y];
+	
+	public TrafficWorld(){
+		
+		super(MAPLONG,MAPHIEGHT,1);
+		
+		this.getBackground().setColor(Color.GREEN);
+		this.getBackground().fill();
+		
+		for(int y=0; y<=ROADS_X; y++){
+			Road road = new Road(MAPLONG,ROADWIDTH);
+			int Position =(y *(ROADWIDTH + ((MAPHIEGHT -(ROADS_X* ROADWIDTH))/(ROADS_X-1))))+ (ROADWIDTH/2);
+			this.addObject(road, (MAPLONG/2), Position);
+		}
+			
+		for(int x=0; x< ROADS_Y; x++){
+			Road road  = new Road(ROADWIDTH,MAPHIEGHT);
+			int Position =(x *(ROADWIDTH + ((MAPLONG -(ROADS_Y* ROADWIDTH))/(ROADS_Y-1))))+ (ROADWIDTH/2);
+			this.addObject(road, Position, MAPHIEGHT/2);
+			
+		} 
+		
+		for( int x=0; x<5; x++){
+			int Position =(((x *(ROADWIDTH + ((MAPHIEGHT -(ROADS_X* ROADWIDTH))/(ROADS_X-1))))+ (ROADWIDTH/2))+12);
+			addCarX(Direction.EAST, Position, MAPLONG);
+			
+		}
+		
+		for(int x=0; x<5; x++){
+			int Position =(((x *(ROADWIDTH + ((MAPHIEGHT -(ROADS_X* ROADWIDTH))/(ROADS_X-1))))+ (ROADWIDTH/2))-12);
+			addCarX(Direction.WEST, Position, MAPLONG);
+			
+		}
+		
+		for(int x=0; x<7; x++){
+			
+			int Position =(((x *(ROADWIDTH + ((MAPLONG -(ROADS_Y* ROADWIDTH))/(ROADS_Y-1))))+ (ROADWIDTH/2))-12);
+			addCarY(Direction.SOUTH, Position , MAPHIEGHT);
+		}
+		
+		for(int x=0; x<7; x++){
+			int Position =(((x *(ROADWIDTH + ((MAPLONG -(ROADS_Y* ROADWIDTH))/(ROADS_Y-1))))+ (ROADWIDTH/2))+12);
+			addCarY(Direction.NORTH, Position, MAPHIEGHT);
+			
+		}
+			
+
+}
+	private void addCarY( Direction direction, int xLocation, int worldHeight){
+		Random ran = new Random();
+		int RandomNUM = ran.nextInt(worldHeight);
+		Car car = new Car();
+		addObject(car, xLocation, RandomNUM);
+		car.setRotation(direction.getRotation());
+		
+		
+	}
+	private void addCarX(Direction direction , int yLocation, int worldWidth){
+		Random ran = new Random();
+		int RandomNum = ran.nextInt(worldWidth);
+		Car car = new Car();
+		addObject(car, RandomNum, yLocation);
+		car.setRotation(direction.getRotation());
+		
+	}
+	
+	private void addIntersectionX(){
+		
+	}
+
+
+
+}
