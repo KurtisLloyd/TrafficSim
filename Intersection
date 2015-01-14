@@ -1,0 +1,16 @@
+package edu.csc150;
+import greenfoot.Actor;
+import greenfoot.GreenfootImage;
+
+
+public class Intersection extends Actor {
+	
+	public Intersection(){
+		GreenfootImage Intersection = new GreenfootImage(50,50);
+		
+		//getobjectsinrange(RADIUS, IntersectionListener.Class);
+		//INterface IntersectionListener
+		//public void approaching the intersection(intersection i );
+		// public void Entering intersection();
+		//public void leaving intersection();
+		
